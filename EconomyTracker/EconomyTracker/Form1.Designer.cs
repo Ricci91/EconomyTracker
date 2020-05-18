@@ -37,6 +37,12 @@
             this.cryptoLabel = new System.Windows.Forms.Label();
             this.cryptoTextbox = new System.Windows.Forms.TextBox();
             this.calculateButton = new System.Windows.Forms.Button();
+            this.fondProsent = new System.Windows.Forms.Label();
+            this.enkelProsent = new System.Windows.Forms.Label();
+            this.spekulasjonProsent = new System.Windows.Forms.Label();
+            this.cryptoProsent = new System.Windows.Forms.Label();
+            this.totalLabel = new System.Windows.Forms.Label();
+            this.totalResultLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // fondTextbox
@@ -113,11 +119,76 @@
             this.calculateButton.UseVisualStyleBackColor = true;
             this.calculateButton.Click += new System.EventHandler(this.calculateButton_Click);
             // 
+            // fondProsent
+            // 
+            this.fondProsent.AutoSize = true;
+            this.fondProsent.Location = new System.Drawing.Point(141, 53);
+            this.fondProsent.Name = "fondProsent";
+            this.fondProsent.Size = new System.Drawing.Size(35, 13);
+            this.fondProsent.TabIndex = 9;
+            this.fondProsent.Text = "label1";
+            this.fondProsent.Visible = false;
+            // 
+            // enkelProsent
+            // 
+            this.enkelProsent.AutoSize = true;
+            this.enkelProsent.Location = new System.Drawing.Point(144, 107);
+            this.enkelProsent.Name = "enkelProsent";
+            this.enkelProsent.Size = new System.Drawing.Size(35, 13);
+            this.enkelProsent.TabIndex = 10;
+            this.enkelProsent.Text = "label2";
+            this.enkelProsent.Visible = false;
+            // 
+            // spekulasjonProsent
+            // 
+            this.spekulasjonProsent.AutoSize = true;
+            this.spekulasjonProsent.Location = new System.Drawing.Point(144, 166);
+            this.spekulasjonProsent.Name = "spekulasjonProsent";
+            this.spekulasjonProsent.Size = new System.Drawing.Size(35, 13);
+            this.spekulasjonProsent.TabIndex = 11;
+            this.spekulasjonProsent.Text = "label3";
+            this.spekulasjonProsent.Visible = false;
+            // 
+            // cryptoProsent
+            // 
+            this.cryptoProsent.AutoSize = true;
+            this.cryptoProsent.Location = new System.Drawing.Point(144, 221);
+            this.cryptoProsent.Name = "cryptoProsent";
+            this.cryptoProsent.Size = new System.Drawing.Size(35, 13);
+            this.cryptoProsent.TabIndex = 12;
+            this.cryptoProsent.Text = "label4";
+            this.cryptoProsent.Visible = false;
+            // 
+            // totalLabel
+            // 
+            this.totalLabel.AutoSize = true;
+            this.totalLabel.Location = new System.Drawing.Point(134, 267);
+            this.totalLabel.Name = "totalLabel";
+            this.totalLabel.Size = new System.Drawing.Size(42, 13);
+            this.totalLabel.TabIndex = 13;
+            this.totalLabel.Text = "TOTAL";
+            // 
+            // totalResultLabel
+            // 
+            this.totalResultLabel.AutoSize = true;
+            this.totalResultLabel.Location = new System.Drawing.Point(183, 267);
+            this.totalResultLabel.Name = "totalResultLabel";
+            this.totalResultLabel.Size = new System.Drawing.Size(35, 13);
+            this.totalResultLabel.TabIndex = 14;
+            this.totalResultLabel.Text = "label1";
+            this.totalResultLabel.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(856, 430);
+            this.Controls.Add(this.totalResultLabel);
+            this.Controls.Add(this.totalLabel);
+            this.Controls.Add(this.cryptoProsent);
+            this.Controls.Add(this.spekulasjonProsent);
+            this.Controls.Add(this.enkelProsent);
+            this.Controls.Add(this.fondProsent);
             this.Controls.Add(this.calculateButton);
             this.Controls.Add(this.cryptoTextbox);
             this.Controls.Add(this.cryptoLabel);
@@ -145,6 +216,12 @@
         private System.Windows.Forms.Label cryptoLabel;
         private System.Windows.Forms.TextBox cryptoTextbox;
         private System.Windows.Forms.Button calculateButton;
+        private System.Windows.Forms.Label fondProsent;
+        private System.Windows.Forms.Label enkelProsent;
+        private System.Windows.Forms.Label spekulasjonProsent;
+        private System.Windows.Forms.Label cryptoProsent;
+        private System.Windows.Forms.Label totalLabel;
+        private System.Windows.Forms.Label totalResultLabel;
     }
 }
 
