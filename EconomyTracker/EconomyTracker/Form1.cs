@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -18,9 +19,14 @@ namespace EconomyTracker
     public partial class Form1 : Form
     {
         Tracker tracker;
+        CsvHandler csvhandler;
+        const string fileName = "tracker.csv";
+        string file = Path.Combine(Environment.CurrentDirectory, @"Data\", fileName);
+
         public Form1()
         {
             InitializeComponent();
+            readCSV();
         }
 
         private void calculateButton_Click(object sender, EventArgs e)
@@ -31,26 +37,28 @@ namespace EconomyTracker
 
         private void Append() /*Legger til data til csv fil uten å legge til header*/
         {
+            string date = DateTime.Now.ToString();
             decimal fond = Convert.ToDecimal(fondTextbox.Text);
             decimal enkeltAksjer = Convert.ToDecimal(enkelTextbox.Text);
             decimal spekulasjon = Convert.ToDecimal(spekulasjonTextbox.Text);
             decimal crypto = Convert.ToDecimal(cryptoTextbox.Text);
-            string file = "C:\\Users\\froyl\\Documents\\Prosjekter\\C#\\EconomyTracker\\tracker.csv";
+            decimal buffer = Convert.ToDecimal(bufferTextbox.Text);
 
-            tracker = new Tracker(fond, enkeltAksjer, spekulasjon, crypto);
+            tracker = new Tracker(date, fond, enkeltAksjer, spekulasjon, crypto, buffer);
             var records = new List<Tracker>
             {
                 tracker
             };
 
-            using (var writer = new StreamWriter(file, true))
-            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
-            {
-                csv.Configuration.HasHeaderRecord = false;
-                csv.WriteRecords(records);
-            }
-            tracker.skrivInfo();
+
+            csvhandler = new CsvHandler();
+            csvhandler.CsvWriter(file, records);
+
+            infoLabel.Text = tracker.skrivInfo();
+            infoLabel.Visible = true;
             totalResultLabel.Visible = true;
+
+            readCSV();
         }
 
         private void updatePercentage()/*Oppdaterer total label og prosentlabler*/
@@ -59,19 +67,48 @@ namespace EconomyTracker
             decimal enkeltAksjer = Convert.ToDecimal(enkelTextbox.Text);
             decimal spekulasjon = Convert.ToDecimal(spekulasjonTextbox.Text);
             decimal crypto = Convert.ToDecimal(cryptoTextbox.Text);
+            decimal buffer = Convert.ToDecimal(bufferTextbox.Text);
             decimal total = fond + enkeltAksjer + spekulasjon + crypto;
 
-            fondProsent.Text = ((fond / total) * 100).ToString() + "%";
+            fondProsent.Text = String.Format("{0:0.00}", (fond / total) * 100) + "%";
             fondProsent.Visible = true;
-            enkelProsent.Text = ((enkeltAksjer / total) * 100).ToString() + "%";
+            enkelProsent.Text = String.Format("{0:0.00}", (enkeltAksjer / total) * 100) + "%";
             enkelProsent.Visible = true;
-            spekulasjonProsent.Text = ((spekulasjon / total) * 100).ToString() + "%";
+            spekulasjonProsent.Text = String.Format("{0:0.00}", (spekulasjon / total) * 100) + "%";
             spekulasjonProsent.Visible = true;
-            cryptoProsent.Text = ((crypto / total) * 100).ToString() + "%";
+            cryptoProsent.Text = String.Format("{0:0.00}", (crypto / total) * 100) + "%";
             cryptoProsent.Visible = true;
-
+            bufferProsent.Text = String.Format("{0:0.00}", (crypto / total) * 100) + "%";
+            bufferProsent.Visible = true;
             totalResultLabel.Text = total.ToString() + ",-";
             totalResultLabel.Visible = true;
+        }
+
+        private void spekulasjonTextbox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void readCSV()
+        {
+            csvhandler = new CsvHandler();
+            List<Tracker> trackers = csvhandler.CsvReaders(file);
+
+            for (int i = 0; i < trackers.Count; i++)
+            {
+                Tracker tracker = trackers[i];
+                Console.WriteLine($"Registered on date: {tracker.Date}");
+                Console.WriteLine($"Fond: {tracker.Fond}");
+                Console.WriteLine($"Enkeltaksjer: {tracker.EnkeltAksjer}");
+                Console.WriteLine($"Spekulasjon: {tracker.Spekulasjon}");
+                Console.WriteLine($"Crypto: {tracker.Crypto}");
+                Console.WriteLine($"Buffer: {tracker.Buffer}");
+            }
         }
     }
 }

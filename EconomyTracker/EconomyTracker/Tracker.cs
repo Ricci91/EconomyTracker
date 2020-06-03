@@ -8,23 +8,29 @@ using System.Windows.Forms;
 
 namespace EconomyTracker
 {
+
     class Tracker
     {
-        public decimal fond { get;}
-        public decimal enkeltAksjer { get;}
-        public decimal spekulasjon { get;}
-        public decimal crypto { get;}
-        public Tracker(decimal fond, decimal enkeltAksjer, decimal spekulasjon, decimal crypto)
+
+        public string Date { get; }
+        public decimal Fond { get;}
+        public decimal EnkeltAksjer { get;}
+        public decimal Spekulasjon { get;}
+        public decimal Crypto { get;}
+        public decimal Buffer { get;}
+        public Tracker(string date, decimal fond, decimal enkeltAksjer, decimal spekulasjon, decimal crypto, decimal buffer)
         {
-            this.fond = fond;
-            this.enkeltAksjer = enkeltAksjer;
-            this.spekulasjon = spekulasjon;
-            this.crypto = crypto;
+            this.Date = date;
+            this.Fond = fond;
+            this.EnkeltAksjer = enkeltAksjer;
+            this.Spekulasjon = spekulasjon;
+            this.Crypto = crypto;
+            this.Buffer = buffer;
         }
 
-        public void skrivInfo()
+        public string skrivInfo() /*Viser en messagebox med teksten under*/
         {
-            MessageBox.Show($"Du har følgende verdier i Aksjefond: {fond}, Enkeltaksjer: {enkeltAksjer}, Spekulasjon: {spekulasjon} og i Crypto: {crypto}");
+            return $"{Date}\r\n\r\nDU HAR FØLGENDE VERDIER I: \r\n\r\n> Aksjefond: {Fond},- <\r\n\r\n > Enkeltaksjer: {EnkeltAksjer},- <\r\n\r\n > Spekulasjon: {Spekulasjon},- <\r\n\r\n > Crypto: {Crypto},- <\r\n\r\n > Buffer: {Buffer},- <\r\n\r\n\r\n\r\n >>CSV fil oppdatert<<";
         }
     }
 }
